@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IStudentRepository>((serviceProvider) =>
 {
-    return new JsonStudentRepository("StudentsJsonFile.json");
+    return new JsonStudentRepository("/Users/ibrahimasgarov/Desktop/University/UniversityAPI/StudentsJsonFile.json");
 });
 
 // builder.Services.AddScoped<IStudentRepository>((serviceProvider) =>
