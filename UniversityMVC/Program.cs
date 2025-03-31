@@ -1,19 +1,22 @@
+using UniversityMVC.Middlewares;
+using UniversityMVC.Repositories;
 using UniversityMVC.Repositories.Base;
+using UniversityMVC.Services;
 using UniversityMVC.Repositories.Json;
-using UniversityMVC.Repositories.Sql;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
-
-
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IStudentRepository>(provider => new JsonStudentRepository(@"/Users/ibrahimasgarov/Desktop/University/UniversityMVC/StudentsJsonFile.json"));
+builder.Services.AddScoped<IStudentRepository>(_ =>
+    new JsonStudentRepository(@"/Users/ibrahimasgarov/Desktop/University/UniversityMVC/StudentsJsonFile.json"));
 
-builder.Services.AddScoped<ITeacherRepository>(provider => new JsonTeacherRepository(@"/Users/ibrahimasgarov/Desktop/University/UniversityMVC/TeachersJsonFile.json"));
+builder.Services.AddScoped<ITeacherRepository>(_ =>
+    new JsonTeacherRepository(@"/Users/ibrahimasgarov/Desktop/University/UniversityMVC/TeachersJsonFile.json"));
 
+builder.Services.AddScoped<IHttpLogRepository, HttpLogRepository>();
+builder.Services.AddScoped<IHttpLogger, HttpLogger>();
 
 var app = builder.Build();
 
@@ -27,6 +30,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<LoggingMiddleware>();
 
 app.UseAuthorization();
 
