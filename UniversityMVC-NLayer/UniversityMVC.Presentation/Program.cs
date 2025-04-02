@@ -16,7 +16,7 @@ builder.Services.AddControllersWithViews();
 // builder.Services.AddScoped<ITeacherRepository>(_ =>
 //     new JsonTeacherRepository(@"/Users/ibrahimasgarov/Desktop/University/UniversityMVC/Database/TeachersJsonFile.json"));
 
-var connectionString = "Server=host.docker.internal;Database=UniversityDataBase;User Id=SA;Password=MyStr0ng@Passw0rd;Encrypt=False;TrustServerCertificate=True;"
+var connectionString = "Server=localhost;Database=UniversityDataBase;User Id=admin;Password=admin;Encrypt=False;TrustServerCertificate=True;"
 ;
 
 builder.Services.AddScoped<IStudentRepository>(_ =>
